@@ -1,6 +1,10 @@
 import enum
 
 class AuthEventTypes(enum.Enum):
+  REGISTER = "register"
+  VERIFIED_ACCOUNT = "verified"
+  CHANGE_PASSWORD = "change-password"
+  CHANGE_PROFILE = "change-profile"
   LOGIN = "login"
   TOKEN_EXPIRED = "token-expired"
   LOGOUT = "logout"

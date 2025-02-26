@@ -1,6 +1,6 @@
+import pytz
 from marshmallow import Schema, ValidationError, fields, validate, missing
 from bson import ObjectId
-from datetime import UTC
 from constants import AuthEventTypes
 
 # helper class for ObjectId conversion
@@ -33,11 +33,12 @@ class UserSchema(MongoDefaultDocumentSchema):
   description = fields.String()
   is_admin = fields.Boolean(default=False)
   is_active = fields.Boolean(default=False)
-  created_at = fields.AwareDateTime(default_timezone=UTC)
-  updated_at = fields.AwareDateTime(default_timezone=UTC)
+  created_at = fields.AwareDateTime(default_timezone=pytz.UTC)
+  updated_at = fields.AwareDateTime(default_timezone=pytz.UTC)
 
 class AuthLogs(MongoDefaultDocumentSchema):
+  user_id = fields.ObjectId()
   event_type = fields.Enum(AuthEventTypes, by_value=True)
   event_details = fields.Dict()
-  created_at = fields.AwareDateTime(default_timezone=UTC)
+  created_at = fields.AwareDateTime(default_timezone=pytz.UTC)
   

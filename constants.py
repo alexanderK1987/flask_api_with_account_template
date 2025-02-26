@@ -1,6 +1,6 @@
 import enum
 
-class AuthEventTypes(enum.Enum):
+class AuthEventTypes(str, enum.Enum):
   REGISTER = "register"
   VERIFIED_ACCOUNT = "verified"
   CHANGE_PASSWORD = "change-password"

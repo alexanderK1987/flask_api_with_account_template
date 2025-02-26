@@ -19,7 +19,7 @@ user_service = UserService()
 
 @blueprint.route("/login", methods=["POST"])
 @doc(
-  summary='login with phone and password',
+  summary='login with credential',
   tags=['user']
 )
 @use_kwargs(CredentialDto)
@@ -32,7 +32,7 @@ def login(**kwargs):
 
 @blueprint.route("/register", methods=["POST"])
 @doc(
-  summary='register with phone and password',
+  summary='register with credential',
   tags=['user']
 )
 @use_kwargs(CredentialDto)
@@ -48,6 +48,7 @@ def register(**kwargs):
 @doc(
   summary='logout and disable token',
   tags=['user'],
+  security=[Config.JWT_SECURITY_OPTION],
 )
 @marshal_with("", "204")
 def logout():

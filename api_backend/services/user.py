@@ -118,8 +118,6 @@ class UserService():
     jti = raw_jwt.get("jti")
     expiration_timestamp = raw_jwt.get("exp")
     expiration_datetime = datetime.fromtimestamp(expiration_timestamp, tz=pytz.UTC) if expiration_timestamp else None
-    if expiration_datetime:
-      expiration_datetime = pytz.UTC.localize(expiration_datetime)
     _now = datetime.now(pytz.UTC)
     if not expiration_datetime or expiration_datetime > _now:
       self.blacklist_jti_collection.insert_one({

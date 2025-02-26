@@ -36,7 +36,7 @@ class UserSchema(MongoDefaultDocumentSchema):
   created_at = fields.AwareDateTime(default_timezone=pytz.UTC)
   updated_at = fields.AwareDateTime(default_timezone=pytz.UTC)
 
-class AuthLogs(MongoDefaultDocumentSchema):
+class AuthLogSchema(MongoDefaultDocumentSchema):
   user_id = fields.ObjectId()
   event_type = fields.Enum(AuthEventTypes, by_value=True)
   event_details = fields.Dict()

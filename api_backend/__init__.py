@@ -59,7 +59,14 @@ def make_app(config, for_manage) -> Flask:
   
   # for swagger
   docs = FlaskApiSpec(app)
-  
+  bp_apispec = app.blueprints.pop("flask-apispec", None)
+  bp_apispec.static_url_path = url_prefix + bp_apispec.static_url_path[1:]
+  app.register_blueprint(bp_apispec)
+  for rule_key, rule in app.url_map._rules_by_endpoint.items():
+    if 'flask-apispec.' in rule_key:
+      rule.reverse()
+      rule.pop()
+
   # Iterate over the rules of the application's url_map
   for rule in app.url_map.iter_rules():
     # Check if the rule belongs to the blueprint
